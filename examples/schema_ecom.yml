@@ -1,0 +1,51 @@
+# Example schema for an e-commerce toy dataset
+seed: 42
+tables:
+  users:
+    rows: 100
+    columns:
+      id:
+        type: integer
+        faker: random_int
+      email:
+        type: string
+        faker: email
+      name:
+        type: string
+        faker: name
+      created_at:
+        type: datetime
+        faker: date_between
+  products:
+    rows: 20
+    columns:
+      id:
+        type: integer
+        faker: random_int
+      sku:
+        type: string
+        faker: bothify
+      title:
+        type: string
+        faker: word
+      price:
+        type: float
+        faker: pyfloat
+  orders:
+    rows: 300
+    columns:
+      id:
+        type: integer
+        faker: random_int
+      user_id:
+        type: integer
+        faker: random_element  # will be resolved to users after generation
+      product_id:
+        type: integer
+        faker: random_element  # will be resolved to products after generation
+      amount:
+        type: integer
+        faker: random_int
+      ordered_at:
+        type: datetime
+        faker: date_between
