@@ -1,0 +1,34 @@
+# maps/customers-map.yml
+file: customers_csv
+format: csv
+table: users
+pk: id
+unique_by:
+  - email
+
+mappings:
+  id:
+    column: external_id
+    transform:
+      - strip
+  email:
+    column: email
+    transform:
+      - strip
+      - lower
+  name:
+    column: full_name
+    transform:
+      - strip
+      - titlecase
+  created_at:
+    column: signup
+    transform:
+      - iso_date
+
+conflict:
+  on: id
+  strategy: merge
+  merge_rules:
+    name: prefer_non_null
+    email: prefer_source
